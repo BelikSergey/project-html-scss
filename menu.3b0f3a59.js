@@ -117,83 +117,18 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
-var bundleURL = null;
-
-function getBundleURLCached() {
-  if (!bundleURL) {
-    bundleURL = getBundleURL();
-  }
-
-  return bundleURL;
-}
-
-function getBundleURL() {
-  // Attempt to find the URL of the current script and use that as the base URL
-  try {
-    throw new Error();
-  } catch (err) {
-    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
-
-    if (matches) {
-      return getBaseURL(matches[0]);
-    }
-  }
-
-  return '/';
-}
-
-function getBaseURL(url) {
-  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
-}
-
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-},{}],"../node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
-var bundle = require('./bundle-url');
-
-function updateLink(link) {
-  var newLink = link.cloneNode();
-
-  newLink.onload = function () {
-    link.remove();
-  };
-
-  newLink.href = link.href.split('?')[0] + '?' + Date.now();
-  link.parentNode.insertBefore(newLink, link.nextSibling);
-}
-
-var cssTimeout = null;
-
-function reloadCSS() {
-  if (cssTimeout) {
-    return;
-  }
-
-  cssTimeout = setTimeout(function () {
-    var links = document.querySelectorAll('link[rel="stylesheet"]');
-
-    for (var i = 0; i < links.length; i++) {
-      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
-        updateLink(links[i]);
-      }
-    }
-
-    cssTimeout = null;
-  }, 50);
-}
-
-module.exports = reloadCSS;
-},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"sass/main.scss":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
-
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"./..\\images\\desktop\\desktop-slider1@1x.jpg":[["desktop-slider1@1x.bbc11b4d.jpg","images/desktop/desktop-slider1@1x.jpg"],"images/desktop/desktop-slider1@1x.jpg"],"./..\\images\\desktop\\desktop-slider1@2x.jpg":[["desktop-slider1@2x.6c69fbdd.jpg","images/desktop/desktop-slider1@2x.jpg"],"images/desktop/desktop-slider1@2x.jpg"],"./..\\images\\mobile\\mobile-slider1@1x.jpg":[["mobile-slider1@1x.c114d096.jpg","images/mobile/mobile-slider1@1x.jpg"],"images/mobile/mobile-slider1@1x.jpg"],"./..\\images\\mobile\\mobile-slider1@2x.jpg":[["mobile-slider1@2x.f1f4a729.jpg","images/mobile/mobile-slider1@2x.jpg"],"images/mobile/mobile-slider1@2x.jpg"],"./..\\images\\tablet\\tablet-slider1@1x.jpg":[["tablet-slider1@1x.38e7d7db.jpg","images/tablet/tablet-slider1@1x.jpg"],"images/tablet/tablet-slider1@1x.jpg"],"./..\\images\\tablet\\tablet-slider1@2x.jpg":[["tablet-slider1@2x.a6258590.jpg","images/tablet/tablet-slider1@2x.jpg"],"images/tablet/tablet-slider1@2x.jpg"],"./..\\images\\desktop\\desktop-slider2@1x.jpg":[["desktop-slider2@1x.6bfd8216.jpg","images/desktop/desktop-slider2@1x.jpg"],"images/desktop/desktop-slider2@1x.jpg"],"./..\\images\\desktop\\desktop-slider3@1x.jpg":[["desktop-slider3@1x.456033b8.jpg","images/desktop/desktop-slider3@1x.jpg"],"images/desktop/desktop-slider3@1x.jpg"],"./..\\images\\desktop\\desktop-slider2@2x.jpg":[["desktop-slider2@2x.0a78028c.jpg","images/desktop/desktop-slider2@2x.jpg"],"images/desktop/desktop-slider2@2x.jpg"],"./..\\images\\desktop\\desktop-slider3@2x.jpg":[["desktop-slider3@2x.841b092a.jpg","images/desktop/desktop-slider3@2x.jpg"],"images/desktop/desktop-slider3@2x.jpg"],"./..\\images\\tablet\\tablet-slider2@1x.jpg":[["tablet-slider2@1x.1267071d.jpg","images/tablet/tablet-slider2@1x.jpg"],"images/tablet/tablet-slider2@1x.jpg"],"./..\\images\\tablet\\tablet-slider3@1x.jpg":[["tablet-slider3@1x.0d66943c.jpg","images/tablet/tablet-slider3@1x.jpg"],"images/tablet/tablet-slider3@1x.jpg"],"./..\\images\\tablet\\tablet-slider2@2x.jpg":[["tablet-slider2@2x.83bf3b17.jpg","images/tablet/tablet-slider2@2x.jpg"],"images/tablet/tablet-slider2@2x.jpg"],"./..\\images\\tablet\\tablet-slider3@2x.jpg":[["tablet-slider3@2x.27ed2e3a.jpg","images/tablet/tablet-slider3@2x.jpg"],"images/tablet/tablet-slider3@2x.jpg"],"./..\\images\\mobile\\mobile-slider2@1x.jpg":[["mobile-slider2@1x.2f9a7e42.jpg","images/mobile/mobile-slider2@1x.jpg"],"images/mobile/mobile-slider2@1x.jpg"],"./..\\images\\mobile\\mobile-slider3@1x.jpg":[["mobile-slider3@1x.7bc49d34.jpg","images/mobile/mobile-slider3@1x.jpg"],"images/mobile/mobile-slider3@1x.jpg"],"./..\\images\\mobile\\mobile-slider2@2x.jpg":[["mobile-slider2@2x.c13d7e3f.jpg","images/mobile/mobile-slider2@2x.jpg"],"images/mobile/mobile-slider2@2x.jpg"],"./..\\images\\mobile\\mobile-slider3@2x.jpg":[["mobile-slider3@2x.9fcb9d19.jpg","images/mobile/mobile-slider3@2x.jpg"],"images/mobile/mobile-slider3@2x.jpg"],"./..\\images\\mobile\\mobile-price@1x.png":[["mobile-price@1x.42e33d88.png","images/mobile/mobile-price@1x.png"],"images/mobile/mobile-price@1x.png"],"./..\\images\\mobile\\mobile-price@2x.png":[["mobile-price@2x.6e2b883a.png","images/mobile/mobile-price@2x.png"],"images/mobile/mobile-price@2x.png"],"./..\\images\\tablet\\tablet-price@1x.png":[["tablet-price@1x.e931739a.png","images/tablet/tablet-price@1x.png"],"images/tablet/tablet-price@1x.png"],"./..\\images\\tablet\\tablet-price@2x.png":[["tablet-price@2x.a6ab590d.png","images/tablet/tablet-price@2x.png"],"images/tablet/tablet-price@2x.png"],"./..\\images\\desktop\\desktop-price@1x.png":[["desktop-price@1x.53c8918e.png","images/desktop/desktop-price@1x.png"],"images/desktop/desktop-price@1x.png"],"./..\\images\\desktop\\desktop-price@2x.png":[["desktop-price@2x.cfd0e7b1.png","images/desktop/desktop-price@2x.png"],"images/desktop/desktop-price@2x.png"],"./..\\images\\mobile\\mobile-footer@1x.jpg":[["mobile-footer@1x.f5048467.jpg","images/mobile/mobile-footer@1x.jpg"],"images/mobile/mobile-footer@1x.jpg"],"./..\\images\\mobile\\mobile-footer@2x.jpg":[["mobile-footer@2x.6a1c8b0c.jpg","images/mobile/mobile-footer@2x.jpg"],"images/mobile/mobile-footer@2x.jpg"],"./..\\images\\tablet\\tablet-footer@1x.jpg":[["tablet-footer@1x.8d2b3689.jpg","images/tablet/tablet-footer@1x.jpg"],"images/tablet/tablet-footer@1x.jpg"],"./..\\images\\tablet\\tablet-footer@2x.jpg":[["tablet-footer@2x.7777657e.jpg","images/tablet/tablet-footer@2x.jpg"],"images/tablet/tablet-footer@2x.jpg"],"./..\\images\\desktop\\desktop-footer@1x.jpg":[["desktop-footer@1x.f8f94a6b.jpg","images/desktop/desktop-footer@1x.jpg"],"images/desktop/desktop-footer@1x.jpg"],"./..\\images\\desktop\\desktop-footer@2x.jpg":[["desktop-footer@2x.f63e52e1.jpg","images/desktop/desktop-footer@2x.jpg"],"images/desktop/desktop-footer@2x.jpg"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
-"use strict";
-
-require("./sass/main.scss");
-},{"./sass/main.scss":"sass/main.scss"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+})({"Js/menu.js":[function(require,module,exports) {
+(function () {
+  var menuBtnRef = document.querySelector('[data-menu-button]');
+  var mobileMenuRef = document.querySelector('[data-menu]');
+  menuBtnRef.addEventListener('click', function () {
+    var expanded = menuBtnRef.getAttribute('aria-expanded') === 'true' || false;
+    menuBtnRef.classList.toggle('is-open');
+    menuBtnRef.setAttribute('aria-expanded', !expanded);
+    mobileMenuRef.classList.toggle('is-open');
+  });
+})();
+},{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -397,5 +332,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","index.js"], null)
-//# sourceMappingURL=/src.e31bb0bc.js.map
+},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","Js/menu.js"], null)
+//# sourceMappingURL=/menu.3b0f3a59.js.map
