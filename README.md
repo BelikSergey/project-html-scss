@@ -1,2 +1,2 @@
-# parcel-project-template
+# project-html-scss
 
